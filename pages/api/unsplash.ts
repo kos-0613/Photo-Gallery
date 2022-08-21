@@ -16,7 +16,7 @@ export default function handler(
 
 // const nextFunction = () => {
 //   fetch(
-//     `https://api.unsplash.com/search/photos?query=${router.query.q}&client_id=${process.env.NEXT_PUBLIC_APIKEY}&per_page=24&order_by=popular&page=${page}`
+//     `https://api.unsplash.com/search/photos?query=${router.query.q}&client_id=${process.env.NEXT_PUBLIC_API_KEY}&per_page=24&order_by=popular&page=${page}`
 //   )
 //     .then((data) => data.json())
 //     .then((imgData: ISearchResponse) => {
