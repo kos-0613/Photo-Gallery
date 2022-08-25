@@ -101,9 +101,9 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
   await fetch(
     `https://api.unsplash.com/topics/${params?.slug}/photos/?client_id=${process.env.NEXT_PUBLIC_API_KEY}&per_page=24&order_by=popular`
   )
-    .then((e) => e.json())
-    .then((e: IAPIResponse[]) => {
-      e.map(({ id, width, height, blur_hash, urls }) => {
+    .then((imgRes) => imgRes.json())
+    .then((imgData: IAPIResponse[]) => {
+      imgData.map(({ id, width, height, blur_hash, urls }) => {
         images.push({ id, width, height, blur_hash, url: urls.thumb });
       });
     });
@@ -115,11 +115,9 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
   await fetch(
     `https://api.unsplash.com/topics/?client_id=${process.env.NEXT_PUBLIC_API_KEY}&per_page=20`
   )
-    .then((e) => e.json())
-    .then((e: ITopicsResponse[]) => {
-      console.log(e);
-
-      e.map(({ id, slug, title }) => {
+    .then((topicsRes) => topicsRes.json())
+    .then((topicsRes: ITopicsResponse[]) => {
+      topicsRes.map(({ id, slug, title }) => {
         topics.push({ id, slug, title });
       });
     });
