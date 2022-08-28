@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
+
 import InfiniteScroll from "react-infinite-scroll-component";
 import Masonry from "react-masonry-component";
+
 import ImageCard from "components/ImageCard";
 import Topics from "components/Topics";
 
