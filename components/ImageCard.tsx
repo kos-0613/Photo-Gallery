@@ -41,13 +41,15 @@ const ImageCard = ({ data: image }: { data: IAPIResponse | Result }) => {
         <Link href={`/image/${image.id}`} passHref>
           <a className="image-link">
             <figure>
-              <BlurhashCanvas
-                hash={image.blur_hash}
-                punch={1}
-                className="h-full w-full inset-0 absolute"
-                height={32}
-                width={32}
-              />
+              {image.blur_hash ? (
+                <BlurhashCanvas
+                  hash={image.blur_hash}
+                  punch={1}
+                  className="h-full w-full inset-0 absolute"
+                  height={32}
+                  width={32}
+                />
+              ) : null}
 
               <Image
                 src={`${image.urls.raw}&fm=webp&w=700&fit=max&q=75`}

@@ -65,13 +65,14 @@ const Home = ({ images, topics, imgOfTheDay }: HomeProps) => {
           <div className="random-img">
             {imgOfTheDay && (
               <>
-                <BlurhashCanvas
-                  hash={imgOfTheDay.blur_hash}
-                  punch={1}
-                  height={32}
-                  width={32}
-                />
-
+                {imgOfTheDay.blur_hash ? (
+                  <BlurhashCanvas
+                    hash={imgOfTheDay.blur_hash}
+                    punch={1}
+                    height={32}
+                    width={32}
+                  />
+                ) : null}
                 <Image
                   src={`${imgOfTheDay.urls.raw}&w=1500&fm=webp&q=75`}
                   alt={imgOfTheDay.alt_description || "Image Of The Day"}

@@ -52,13 +52,15 @@ const DynamicImage = ({
         <>
           <div className="image">
             <figure>
-              <BlurhashCanvas
-                hash={currentImage.blur_hash}
-                punch={1}
-                className="h-full w-full inset-0 absolute"
-                height={32}
-                width={32}
-              />
+              {currentImage.blur_hash ? (
+                <BlurhashCanvas
+                  hash={currentImage.blur_hash}
+                  punch={1}
+                  className="h-full w-full inset-0 absolute"
+                  height={32}
+                  width={32}
+                />
+              ) : null}
               <Image
                 src={`${currentImage.urls.raw}&fm=webp&w=1500&fit=max&q=75`}
                 alt={currentImage.description || "Placeholder Image"}

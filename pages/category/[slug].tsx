@@ -50,13 +50,14 @@ const CatagorySlug = ({ images, topics, currentTopic }: CatagorySlugProps) => {
           <div className="random-img">
             {currentTopic && (
               <>
-                <BlurhashCanvas
-                  hash={currentTopic.cover_photo.blur_hash!}
-                  punch={1}
-                  height={32}
-                  width={32}
-                />
-
+                {currentTopic.cover_photo.blur_hash ? (
+                  <BlurhashCanvas
+                    hash={currentTopic.cover_photo.blur_hash!}
+                    punch={1}
+                    height={32}
+                    width={32}
+                  />
+                ) : null}
                 <Image
                   src={`${
                     currentTopic.cover_photo.urls!.raw
