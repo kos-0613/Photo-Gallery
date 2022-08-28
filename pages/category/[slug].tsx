@@ -20,7 +20,6 @@ import type {
   ICurrentTopicResponse,
   ITopicsResponse,
 } from "types/TopicsResponse";
-
 type CatagorySlugProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const CatagorySlug = ({ images, topics, currentTopic }: CatagorySlugProps) => {
