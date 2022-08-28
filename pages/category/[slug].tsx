@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
+
 import InfiniteScroll from "react-infinite-scroll-component";
 import Masonry from "react-masonry-component";
 import { BlurhashCanvas } from "react-blurhash";
+
 import ImageCard from "components/ImageCard";
 import Topics from "components/Topics";
 
@@ -18,7 +20,6 @@ import type {
   ICurrentTopicResponse,
   ITopicsResponse,
 } from "types/TopicsResponse";
-
 type CatagorySlugProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const CatagorySlug = ({ images, topics, currentTopic }: CatagorySlugProps) => {
@@ -35,7 +36,8 @@ const CatagorySlug = ({ images, topics, currentTopic }: CatagorySlugProps) => {
       .then((imgData: IAPIResponse[]) => {
         (images as IAPIResponse[])?.push(...imgData);
         setPage(page + 1);
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -47,18 +49,18 @@ const CatagorySlug = ({ images, topics, currentTopic }: CatagorySlugProps) => {
           <div className="random-img">
             {currentTopic && (
               <>
-                <BlurhashCanvas
-                  hash={currentTopic.cover_photo.blur_hash!}
-                  punch={1}
-                  height={32}
-                  width={32}
-                />
-
+                {currentTopic.cover_photo.blur_hash ? (
+                  <BlurhashCanvas
+                    hash={currentTopic.cover_photo.blur_hash!}
+                    punch={1}
+                    height={32}
+                    width={32}
+                  />
+                ) : null}
                 <Image
                   src={`${
                     currentTopic.cover_photo.urls!.raw
-                  }&w=150&fm=webp&q=75`}
-                  // src={`${imgOfTheDay.urls.raw}&w=1500&fm=webp&q=75`}
+                  }&w=1500&fm=webp&q=75`}
                   alt={
                     currentTopic.cover_photo.alt_description ||
                     "Image Of The Day"
@@ -114,7 +116,13 @@ const CatagorySlug = ({ images, topics, currentTopic }: CatagorySlugProps) => {
               hasMore={true}
               loader={
                 <h1 className="loading-msg">
-                  <Image src="/loading.gif" width={32} height={32} alt="1" />
+                  <Image
+                    src="/loading.gif"
+                    loading="eager"
+                    width={32}
+                    height={32}
+                    alt="1"
+                  />
                   <span className="ml-2"> Loading </span>
                 </h1>
               }
@@ -213,10 +221,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { slug },
   }));
 
-  return {
-    paths: topicPaths,
-    fallback: false,
-  };
+  return { paths: topicPaths, fallback: false };
 };
 
 export default CatagorySlug;

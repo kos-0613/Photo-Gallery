@@ -6,7 +6,7 @@ export interface IAPIResponse {
   width: number;
   height: number;
   color: string;
-  blur_hash: string;
+  blur_hash: string | null;
   description: null | string;
   alt_description: null | string;
   urls: Urls;

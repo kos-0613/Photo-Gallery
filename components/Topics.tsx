@@ -1,9 +1,13 @@
-import { motion } from "framer-motion";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
+
+// types
 import type { Tag } from "types/PhotoResponse";
 import type { ITopicsResponse } from "types/TopicsResponse";
 import type { MutableRefObject } from "react";
+import type { Tag } from "types/PhotoResponse";
+import type { ITopicsResponse } from "types/TopicsResponse";
 
 interface ITopicsProps {
   items: ITopicsResponse[] | Tag[] | null;
@@ -21,20 +25,27 @@ const Topics = ({ items: topics, wrapper }: ITopicsProps) => {
       dragTransition={{ power: 0.035 }}
       className="topics"
     >
-      {topics?.map((topic, index) => (
-        <div key={(topic as ITopicsResponse)?.id || `${topic.title}-${index}`}>
-          <Link
-            href={
-              (topic as ITopicsResponse).slug
-                ? `/category/${(topic as ITopicsResponse)?.slug}`
-                : `/search/${topic.title?.split(" ").join("-")}`
-            }
-            passHref
+
+      {console.log(`topics:${topics}`)}
+      {topics?.map((topic, index) =>
+        topic ? (
+          <div
+            key={(topic as ITopicsResponse)?.id || `${topic.title}-${index}`}
           >
-            <motion.a draggable={false}>{topic.title}</motion.a>
-          </Link>
-        </div>
-      ))}
+            {console.log(`topic:${topic}`)}
+            <Link
+              href={
+                (topic as ITopicsResponse).slug
+                  ? `/category/${(topic as ITopicsResponse)?.slug}`
+                  : `/search/${topic.title?.split(" ").join("-")}`
+              }
+              passHref
+            >
+              <motion.a draggable={false}>{topic.title}</motion.a>
+            </Link>
+          </div>
+        ) : null
+      )}
     </motion.div>
   );
 };

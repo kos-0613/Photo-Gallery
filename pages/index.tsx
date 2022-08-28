@@ -1,7 +1,11 @@
 import { useRef, useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/dist/client/router";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import Masonry from "react-masonry-component";
+import { BlurhashCanvas } from "react-blurhash";
+
 import ImageCard from "components/ImageCard";
 import Topics from "components/Topics";
 
@@ -9,9 +13,6 @@ import Topics from "components/Topics";
 import type { InferGetStaticPropsType } from "next";
 import type { IAPIResponse } from "types/ApiResponse";
 import type { ITopicsResponse } from "types/TopicsResponse";
-import Image from "next/image";
-import { BlurhashCanvas } from "react-blurhash";
-import { useRouter } from "next/dist/client/router";
 
 type HomeProps = InferGetStaticPropsType<typeof getStaticProps> & {};
 
@@ -53,7 +54,8 @@ const Home = ({ images, topics, imgOfTheDay }: HomeProps) => {
       .then((imgData: IAPIResponse[]) => {
         images?.push(...imgData);
         setPage(page + 1);
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -63,16 +65,16 @@ const Home = ({ images, topics, imgOfTheDay }: HomeProps) => {
           <div className="random-img">
             {imgOfTheDay && (
               <>
-                <BlurhashCanvas
-                  hash={imgOfTheDay.blur_hash}
-                  punch={1}
-                  height={32}
-                  width={32}
-                />
-
+                {imgOfTheDay.blur_hash ? (
+                  <BlurhashCanvas
+                    hash={imgOfTheDay.blur_hash}
+                    punch={1}
+                    height={32}
+                    width={32}
+                  />
+                ) : null}
                 <Image
-                  src={`${imgOfTheDay.urls.raw}&w=150&fm=webp&q=75`}
-                  // src={`${imgOfTheDay.urls.raw}&w=1500&fm=webp&q=75`}
+                  src={`${imgOfTheDay.urls.raw}&w=1500&fm=webp&q=75`}
                   alt={imgOfTheDay.alt_description || "Image Of The Day"}
                   unoptimized={true}
                   layout="fill"
@@ -144,7 +146,13 @@ const Home = ({ images, topics, imgOfTheDay }: HomeProps) => {
               hasMore={true}
               loader={
                 <h1 className="loading-msg">
-                  <Image src="/loading.gif" width={32} height={32} alt="1" />
+                  <Image
+                    src="/loading.gif"
+                    loading="eager"
+                    width={32}
+                    height={32}
+                    alt="1"
+                  />
                   <span> Loading </span>
                 </h1>
               }
