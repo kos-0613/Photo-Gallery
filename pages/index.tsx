@@ -48,7 +48,7 @@ const Home = ({ images, topics, imgOfTheDay }: HomeProps) => {
 
   const nextFunction = () => {
     fetch(
-      `https://api.unsplash.com/photos/?client_id=${process.env.NEXT_PUBLIC_API_KEY}&per_page=15&page=${page}&order_by=popular`
+      `https://api.unsplash.com/photos/random?client_id=${process.env.NEXT_PUBLIC_API_KEY}&count=30&query=interior`
     )
       .then((data) => data.json())
       .then((imgData: IAPIResponse[]) => {
@@ -199,7 +199,7 @@ export const getStaticProps = async () => {
   const images: IAPIResponse[] = [];
 
   await fetch(
-    `https://api.unsplash.com/photos/?client_id=${process.env.NEXT_PUBLIC_API_KEY}&per_page=30&order_by=popular`
+    `https://api.unsplash.com/photos/random?client_id=${process.env.NEXT_PUBLIC_API_KEY}&count=30&query=interior`
   )
     .then((data) => data.json())
     .then((imgData: IAPIResponse[]) => {
