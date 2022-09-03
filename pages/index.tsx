@@ -73,13 +73,15 @@ const Home = ({ images, topics, imgOfTheDay }: HomeProps) => {
                     width={32}
                   />
                 ) : null}
-                <Image
-                  src={`${imgOfTheDay.urls.raw}&w=1500&fm=webp&q=75`}
-                  alt={imgOfTheDay.alt_description || "Image Of The Day"}
-                  unoptimized={true}
-                  layout="fill"
-                  objectFit="cover"
-                />
+                {imgOfTheDay.urls && (
+                  <Image
+                    src={`${imgOfTheDay.urls.raw}&w=1500&fm=webp&q=75`}
+                    alt={imgOfTheDay.alt_description || "Image Of The Day"}
+                    unoptimized={true}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                )}
 
                 {/* form */}
                 <div className="form-wrapper">
@@ -119,9 +121,13 @@ const Home = ({ images, topics, imgOfTheDay }: HomeProps) => {
                   <a
                     target="_blank"
                     rel="noreferrer noopener"
-                    href={`${imgOfTheDay.user.links.html}?utm_source=photon&utm_medium=referral`}
+                    href={
+                      imgOfTheDay.user &&
+                      `${imgOfTheDay.user.links.html}?utm_source=photon&utm_medium=referral`
+                    }
                   >
-                    {`${imgOfTheDay.user.first_name} ${imgOfTheDay.user.last_name}`}
+                    {imgOfTheDay.user &&
+                      `${imgOfTheDay.user.first_name} ${imgOfTheDay.user.last_name}`}
                   </a>{" "}
                   on{" "}
                   <a
@@ -218,8 +224,10 @@ export const getStaticProps = async () => {
   // random images fn and var declaration starts
   let imgOfTheDay: IAPIResponse | null = null;
 
+  //TOP背景画像
+  const backgroundImage: String = "interior";
   await fetch(
-    `https://api.unsplash.com/photos/random/?client_id=${process.env.NEXT_PUBLIC_API_KEY}`
+    `https://api.unsplash.com/photos/random/?client_id=${process.env.NEXT_PUBLIC_API_KEY}&query=${backgroundImage}`
   )
     .then((data) => data.json())
     .then((imgData: IAPIResponse) => {
