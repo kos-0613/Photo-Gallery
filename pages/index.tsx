@@ -208,11 +208,12 @@ export const getStaticProps = async () => {
     .catch((err) => console.log(err));
   // images fn and var declaration ends
 
+  // トピックス
   // topics fn and var declaration starts
   const topics: ITopicsResponse[] = [];
 
   await fetch(
-    `https://api.unsplash.com/topics/?client_id=${process.env.NEXT_PUBLIC_API_KEY}&per_page=20`
+    "https://api.unsplash.com/topics/?client_id=bD3ny735kysS0gTA2jtP5cZ27UbyCQkZkqjxREiJ44g&ids=interiors,architecture-interior"
   )
     .then((data) => data.json())
     .then((topicsData: ITopicsResponse[]) => {

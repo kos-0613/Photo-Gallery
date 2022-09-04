@@ -22,7 +22,6 @@ const Topics = ({ items: topics, wrapper }: ITopicsProps) => {
       dragTransition={{ power: 0.035 }}
       className="topics"
     >
-      {console.log(`topics:${topics}`)}
       {topics?.map((topic, index) =>
         topic ? (
           <div
