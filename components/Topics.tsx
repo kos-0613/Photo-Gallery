@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 
 
 // types
-import type { Tag } from "types/PhotoResponse";
-import type { ITopicsResponse } from "types/TopicsResponse";
 import type { MutableRefObject } from "react";
 import type { Tag } from "types/PhotoResponse";
 import type { ITopicsResponse } from "types/TopicsResponse";
@@ -25,8 +23,6 @@ const Topics = ({ items: topics, wrapper }: ITopicsProps) => {
       dragTransition={{ power: 0.035 }}
       className="topics"
     >
-
-      {console.log(`topics:${topics}`)}
       {topics?.map((topic, index) =>
         topic ? (
           <div
