@@ -223,11 +223,11 @@ export const getServerSideProps = async ({
 
   // images fn and var declaration starts
   const images: IAPIResponse[] = [];
-
   const queryTags = currentImage[0].tags.map((tag) => tag.title).join(",");
 
   await fetch(
     `https://api.unsplash.com/photos/random?query=${queryTags}&client_id=${process.env.NEXT_PUBLIC_API_KEY}&count=30`
+
   )
     .then((imgRes) => imgRes.json())
     .then((imgData: IAPIResponse[]) => {
