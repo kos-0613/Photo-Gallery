@@ -179,7 +179,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const topics: ITopicsResponse[] = [];
 
   await fetch(
-    "https://api.unsplash.com/topics/?client_id=bD3ny735kysS0gTA2jtP5cZ27UbyCQkZkqjxREiJ44g&ids=interiors,architecture-interior"
+    "https://api.unsplash.com/topics/?client_id=bD3ny735kysS0gTA2jtP5cZ27UbyCQkZkqjxREiJ44g&ids=interiors,architecture-interior,House"
   )
     .then((topicsRes) => topicsRes.json())
     .then((topicsRes: ITopicsResponse[] | ErrorResponse) => {

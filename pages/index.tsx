@@ -38,6 +38,24 @@ const Home = ({ images, topics, imgOfTheDay }: HomeProps) => {
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
 
+  const defaultHometags = [
+    { id: "001", title: "room" },
+    { id: "002", title: "home" },
+    { id: "003", title: "bedroom" },
+    { id: "004", title: "kitchen" },
+    { id: "005", title: "interiors" },
+    { id: "006", title: "bathroom" },
+    { id: "007", title: "kidsroom" },
+    { id: "008", title: "living" },
+    { id: "009", title: "balcony" },
+    { id: "010", title: "dining" },
+    { id: "011", title: "yard" },
+    { id: "012", title: "roof" },
+    { id: "013", title: "furniture" },
+    { id: "014", title: "exterior" },
+    { id: "015", title: "closet" },
+  ];
+
   const handleFormsubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -142,7 +160,7 @@ const Home = ({ images, topics, imgOfTheDay }: HomeProps) => {
             )}
           </div>
 
-          <Topics items={topics} wrapper={catagoriesWrapper} />
+          <Topics items={defaultHometags} wrapper={catagoriesWrapper} />
 
           <div className="infinite-scroll-wrapper">
             <InfiniteScroll
@@ -213,7 +231,7 @@ export const getStaticProps = async () => {
   const topics: ITopicsResponse[] = [];
 
   await fetch(
-    "https://api.unsplash.com/topics/?client_id=bD3ny735kysS0gTA2jtP5cZ27UbyCQkZkqjxREiJ44g&ids=interiors,architecture-interior"
+    "https://api.unsplash.com/topics/?client_id=bD3ny735kysS0gTA2jtP5cZ27UbyCQkZkqjxREiJ44g&ids=interiors,architecture-interior,House,JIUjvqe2ZHg"
   )
     .then((data) => data.json())
     .then((topicsData: ITopicsResponse[]) => {
