@@ -12,7 +12,7 @@ import Topics from "components/Topics";
 // types
 import type { InferGetStaticPropsType } from "next";
 import type { IAPIResponse } from "types/ApiResponse";
-import type { ITopicsResponse } from "types/TopicsResponse";
+
 
 type HomeProps = InferGetStaticPropsType<typeof getStaticProps> & {};
 
@@ -32,7 +32,7 @@ const SearchSVG = () => (
   </svg>
 );
 
-const Home = ({ images, topics, imgOfTheDay }: HomeProps) => {
+const Home = ({ images, imgOfTheDay }: HomeProps) => {
   const catagoriesWrapper = useRef(null);
   const [page, setPage] = useState(3);
   const [searchValue, setSearchValue] = useState("");
@@ -226,20 +226,6 @@ export const getStaticProps = async () => {
     .catch((err) => console.log(err));
   // images fn and var declaration ends
 
-  // トピックス
-  // topics fn and var declaration starts
-  const topics: ITopicsResponse[] = [];
-
-  await fetch(
-    "https://api.unsplash.com/topics/?client_id=bD3ny735kysS0gTA2jtP5cZ27UbyCQkZkqjxREiJ44g&ids=interiors,architecture-interior,House,JIUjvqe2ZHg"
-  )
-    .then((data) => data.json())
-    .then((topicsData: ITopicsResponse[]) => {
-      topics.push(...topicsData);
-    })
-    .catch((err) => console.log(err));
-  // topics fn and var declaration ends
-
   // random images fn and var declaration starts
   let imgOfTheDay: IAPIResponse | null = null;
 
@@ -259,7 +245,7 @@ export const getStaticProps = async () => {
     return { props: { images: null, topics: null, imgOfTheDay: null } };
 
   return {
-    props: { images, topics, imgOfTheDay: imgOfTheDay as IAPIResponse | null },
+    props: { images, imgOfTheDay: imgOfTheDay as IAPIResponse | null },
     revalidate: 10 * 60,
   }; // revalidate in seconds
 };
