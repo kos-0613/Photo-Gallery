@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+
 // types
 import type { MutableRefObject } from "react";
 import type { Tag } from "types/PhotoResponse";
