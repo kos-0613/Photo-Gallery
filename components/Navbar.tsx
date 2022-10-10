@@ -86,10 +86,11 @@ const Navbar = () => {
           name="search"
           id="search"
           placeholder="Search anything..."
+          data-testid="search-input"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
-        <button type="submit">
+        <button data-testid="search-button" type="submit">
           <SearchSVG />
         </button>
       </form>

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-
 // types
 import type { MutableRefObject } from "react";
 import type { Tag } from "types/PhotoResponse";
@@ -28,7 +27,6 @@ const Topics = ({ items: topics, wrapper }: ITopicsProps) => {
           <div
             key={(topic as ITopicsResponse)?.id || `${topic.title}-${index}`}
           >
-            {console.log(`topic:${topic}`)}
             <Link
               href={
                 (topic as ITopicsResponse).slug

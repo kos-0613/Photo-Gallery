@@ -107,7 +107,7 @@ export const getServerSideProps = async ({
   const query = (params!.q as string).split("-").join(" ");
 
   await fetch(
-    `https://api.unsplash.com/search/photos?query=${query}&client_id=${process.env.NEXT_PUBLIC_API_KEY}&per_page=24&order_by=popular`
+    `${process.env.NEXT_PUBLIC_RESTAPI_URL}/search/photos?query=${query}&client_id=${process.env.NEXT_PUBLIC_API_KEY}&per_page=24&order_by=popular`
   )
     .then((imgRes) => imgRes.json())
     .then((imgRes: ISearchResponse) => {
