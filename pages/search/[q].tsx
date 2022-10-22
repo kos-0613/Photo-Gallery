@@ -22,7 +22,7 @@ const Search = ({
 
   const nextFunction = () => {
     fetch(
-      `https://api.unsplash.com/search/photos?query=${router.query.q}&client_id=${process.env.NEXT_PUBLIC_API_KEY}&per_page=24&order_by=popular&page=${page}`
+      `${process.env.NEXT_PUBLIC_RESTAPI_URL}/search/photos?query=${router.query.q}&client_id=${process.env.NEXT_PUBLIC_API_KEY}&per_page=24&order_by=popular&page=${page}`
     )
       .then((data) => data.json())
       .then((imgData: ISearchResponse) => {

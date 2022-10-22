@@ -13,7 +13,6 @@ import Topics from "components/Topics";
 import type { InferGetStaticPropsType } from "next";
 import type { IAPIResponse } from "types/ApiResponse";
 
-
 type HomeProps = InferGetStaticPropsType<typeof getStaticProps> & {};
 
 const SearchSVG = () => (
@@ -217,7 +216,7 @@ export const getStaticProps = async () => {
   const images: IAPIResponse[] = [];
 
   await fetch(
-    `https://api.unsplash.com/photos/random?client_id=${process.env.NEXT_PUBLIC_API_KEY}&count=30&query=interior`
+    `${process.env.NEXT_PUBLIC_RESTAPI_URL}/photos/random?client_id=${process.env.NEXT_PUBLIC_API_KEY}&count=30&query=interior`
   )
     .then((data) => data.json())
     .then((imgData: IAPIResponse[]) => {
@@ -232,7 +231,7 @@ export const getStaticProps = async () => {
   //TOP背景画像
   const backgroundImage: String = "interior";
   await fetch(
-    `https://api.unsplash.com/photos/random/?client_id=${process.env.NEXT_PUBLIC_API_KEY}&query=${backgroundImage}`
+    `${process.env.NEXT_PUBLIC_RESTAPI_URL}/photos/random/?client_id=${process.env.NEXT_PUBLIC_API_KEY}&query=${backgroundImage}`
   )
     .then((data) => data.json())
     .then((imgData: IAPIResponse) => {
