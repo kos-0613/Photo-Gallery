@@ -1,7 +1,14 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const WindiCSS = require("windicss-webpack-plugin");
+
+module.exports = {
   reactStrictMode: true,
   swcMinify: true,
-}
+  webpack(config) {
+    config.plugins.push(new WindiCSS());
+    return config;
+  },
 
-module.exports = nextConfig
+  images: {
+    domains: ["images.unsplash.com", "deelay.me", "picsum.photos"],
+  },
+};
