@@ -85,8 +85,8 @@ const Navbar = () => {
           type="search"
           name="search"
           id="search"
-          placeholder="Search anything..."
           data-testid="search-input"
+          placeholder="Search anything..."
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
@@ -95,6 +95,7 @@ const Navbar = () => {
         </button>
       </form>
       <motion.button
+        data-testid="toggle-button"
         whileTap={{ scale: 0.9 }}
         className="btn"
         onClick={() => {
